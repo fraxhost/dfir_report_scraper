@@ -12,6 +12,11 @@ import os
 
 BOT_NAME = "dfir_report_scraper"
 
+FEEDS = {
+    "dfir_reports.json": {"format": "json"},
+    "dfir_reports.csv": {"format": "csv"},
+}
+
 SPIDER_MODULES = ["dfir_report_scraper.spiders"]
 NEWSPIDER_MODULE = "dfir_report_scraper.spiders"
 
@@ -70,9 +75,10 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    "dfir_report_scraper.pipelines.DfirReportScraperPipeline": 300,
-# }
+ITEM_PIPELINES = {
+    #    "dfir_report_scraper.pipelines.DfirReportScraperPipeline": 300,
+    "dfir_report_scraper.pipelines.DescriptionCleanupPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
